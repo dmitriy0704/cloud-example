@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.springframework.boot'
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+
+    implementation project(":scs-model")
+}

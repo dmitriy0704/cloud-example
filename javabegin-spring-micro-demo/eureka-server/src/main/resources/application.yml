@@ -1,0 +1,30 @@
+server:
+  port: 8761
+
+# id приложения eureka
+spring:
+  application:
+    name: eserver
+
+  # отключаем регистрацию вебсервисов, так как это не колиент
+eureka:
+  instance:
+    hostname: localhost
+  client:
+      registerWithEureka: false
+      fetchRegistry: false
+      serviceUrl:
+        defaultZone: http://localhost:8081/eureka # url, куда будет происходить регистрация микросервисов
+
+management.endpoints.web.exposure.include: "*"
+
+  # отключение лишних логов
+logging:
+  level:
+    com.netflix.eureka: OFF
+    com.netflix.discovery: OFF
+  pattern:
+    console: '%C{1.} [%-5level] %d{HH:mm:ss} - %msg%n'
+
+#eureka.renewalPercentThreshold=0.85
+#eureka.server.enableSelfPreservation=false

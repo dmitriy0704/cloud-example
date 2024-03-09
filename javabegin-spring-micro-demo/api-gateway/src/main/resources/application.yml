@@ -1,0 +1,40 @@
+server:
+  port: 8082
+
+# id \u043F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u044F eureka
+spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: test
+            uri: lb://eclient
+            predicates:
+              - Path=/main/test
+              - Method=GET
+          - id: test2
+            uri:  lb://eclient2
+            predicates:
+              - Path=/new/name
+              - Method=GET
+
+
+  # url, \u043A\u0443\u0434\u0430 \u0431\u0443\u0434\u0435\u0442 \u043F\u0440\u043E\u0438\u0441\u0445\u043E\u0434\u0438\u0442\u044C \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u044F \u043C\u0438\u043A\u0440\u043E\u0441\u0435\u0440\u0432\u0438\u0441\u043E\u0432
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    registryFetchIntervalSeconds: 5
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 5
+  
+  # \u0444\u043E\u0440\u043C\u0430\u0442 \u043B\u043E\u0433\u043E\u0432
+logging:
+  pattern:
+    console: "%C{1.} [%-5level] %d{HH:mm:ss} - %msg%n"
